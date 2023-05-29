@@ -386,7 +386,7 @@ code 只有三种状态 0, 1, 2
 
 升级版本，框架原生支持qps打点
 
-[https://app.bccv5.vdyoo.com/grafana/d/hOmEpYD4z/xue-xi-ji-ye-wu-kuang-jia-jian-kong?orgId=1&from=now-1h&to=now&refresh=5s](https://app.bccv5.vdyoo.com/grafana/d/hOmEpYD4z/xue-xi-ji-ye-wu-kuang-jia-jian-kong?orgId=1&from=now-1h&to=now&refresh=5s)  账号密码 guest/guests
+[https://app.xxx.com/grafana/d/hOmEpYD4z/xue-xi-ji-ye-wu-kuang-jia-jian-kong?orgId=1&from=now-1h&to=now&refresh=5s](https://app.xxx.com/grafana/d/hOmEpYD4z/xue-xi-ji-ye-wu-kuang-jia-jian-kong?orgId=1&from=now-1h&to=now&refresh=5s)  账号密码 guest/guests
 
 
 
@@ -439,7 +439,7 @@ confutil.LoadYmlFile 函数， 加载到你的结构体上即可，注意是和 
 参考[https://cloud.xxx.com/k8s-fe/appManage/appManageCenter/detail?id=16293](https://cloud.xxx.com/k8s-fe/appManage/appManageCenter/detail?id=16293)
 
 ```plain
-export GOPROXY=https://goproxy.cn,http://mirrors.xxx.com/repository/go,http://goproxy.xesv5.com,direct 
+export GOPROXY=https://goproxy.cn,http://mirrors.xxx.com/repository/go
 ```
 
 ### 日志采集

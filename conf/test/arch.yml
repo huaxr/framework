@@ -36,8 +36,8 @@ gin:
 # 支持多mysql客户端，注意yml的写法， - 表示列表中的一项，注意空格
 mysql:
   - slaves:
-      - user_center_ro:yYfOJG6szgjpWzH_@tcp(bigclass-xxj-mysql-montage-test-dbproxy:4810)/user_center?charset=utf8mb4
-    master: user_center_ro:yYfOJG6szgjpWzH_@tcp(bigclass-xxj-mysql-montage-test-dbproxy:4810)/user_center?charset=utf8mb4
+      - user_center_ro:yYfOJG6szgjpWzH_@tcp(-xxj-mysql-montage-test-dbproxy:4810)/user_center?charset=utf8mb4
+    master: user_center_ro:yYfOJG6szgjpWzH_@tcp(-xxj-mysql-montage-test-dbproxy:4810)/user_center?charset=utf8mb4
     maxConn: 5
     maxIdle: 2
     logLevel: 0
@@ -46,7 +46,7 @@ mysql:
 
 ## 支持多redis客户端，注意yml的写法， - 表示列表中的一项，注意空格
 redis:
-  - host: bigclass-redis-supply-test-twproxy:2090 #twproxy
+  - host: -redis-supply-test-twproxy:2090 #twproxy
     password: KUBdTCuO8LF5uew_
     idletimeout: 240
     readtimeout: 20

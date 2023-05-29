@@ -1,4 +1,4 @@
-// Author: huaxinrui@tal.com
+// Author: huaxr
 // Time:   2021/8/27 上午11:00
 // Git:    huaxr
 
@@ -58,7 +58,7 @@ func createWeighted(servers map[string]string) []*Weighted {
 func newWeightedRoundRobinSelector(servers []string) Selector {
 	var srv = make(map[string]string)
 	for d, i := range servers {
-		srv[i] = fmt.Sprintf( "weight=%d", d)
+		srv[i] = fmt.Sprintf("weight=%d", d)
 	}
 	ss := createWeighted(srv)
 	return &weightedRoundRobinSelector{servers: ss}

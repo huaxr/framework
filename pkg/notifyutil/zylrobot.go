@@ -14,7 +14,6 @@ import (
 	"github.com/spf13/cast"
 )
 
-// https://doc-openapi.saash.vdyoo.com/doc#/robot/develop?id=%e8%87%aa%e5%ae%9a%e4%b9%89%e6%9c%ba%e5%99%a8%e4%ba%ba
 const HOST = "https://xxx.com/robot/send"
 
 type RobotSendRequest struct {

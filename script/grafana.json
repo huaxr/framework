@@ -28,7 +28,7 @@
       "title": "日志平台",
       "tooltip": "日志查询",
       "type": "link",
-      "url": "https://cloud.tal.com/logcenter#/search"
+      "url": "https://cloud.xxx.com/logcenter#/search"
     },
     {
       "asDropdown": false,
@@ -40,7 +40,7 @@
       "title": "Kibana",
       "tooltip": "",
       "type": "link",
-      "url": "https://basiclog.xesv5.com/app/kibana#/discover?_g=h@bf269a7&_a=h@623d88a"
+      "url": "https://xxx.com/app/kibana#/discover?_g=h@bf269a7&_a=h@623d88a"
     }
   ],
   "panels": [

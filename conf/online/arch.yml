@@ -15,7 +15,7 @@ gin:
   port: 9000
 
 redis:
-  - host: bigclass-xxj-redis-montage-course-twproxy:22240 #twproxy
+  - host: x:22240 #twproxy
     password: vpP99rHMRW2GP3E_
     idletimeout: 240
     readtimeout: 20
@@ -25,8 +25,8 @@ redis:
 
 mysql:
   - slaves:
-      - user_center_ro:cG4QZhxOCqqoqe2_@tcp(bigclass-xxj-mysql-montage-cms-dbproxy:4970)/user_center?charset=utf8mb4
-    master: user_center_ro:cG4QZhxOCqqoqe2_@tcp(bigclass-xxj-mysql-montage-cms-dbproxy:4970)/user_center?charset=utf8mb4
+      - user_center_ro:cG4QZhxOCqqoqe2_@tcp(-xxj-mysql-montage-cms-dbproxy:4970)/user_center?charset=utf8mb4
+    master: user_center_ro:cG4QZhxOCqqoqe2_@tcp(-xxj-mysql-montage-cms-dbproxy:4970)/user_center?charset=utf8mb4
     maxConn: 100
     maxIdle: 30
     logLevel: 1
