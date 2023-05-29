@@ -1,0 +1,9 @@
+[Unit]
+Description=https://prometheus.io
+
+[Service]
+Restart=on-failure
+ExecStart=/usr/local/prometheus/prometheus --config.file=/usr/local/prometheus/prometheus.yml
+
+[Install]
+WantedBy=multi-user.target

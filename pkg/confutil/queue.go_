@@ -1,0 +1,32 @@
+// Author: huaxinrui@tal.com
+// Time: 2022-10-21 14:20
+// Git: huaxr
+
+package confutil
+
+type Partition string
+type ConsumerOffset string
+
+const (
+	Hash   Partition = "hash"
+	Manual Partition = "manual"
+	Random Partition = "random"
+
+	Oldest ConsumerOffset = "oldest"
+	Newest ConsumerOffset = " newest"
+)
+
+type Queue struct {
+	Nsq struct {
+		Brokers string `yaml:"brokers"`
+		Lookups string `yaml:"lookups"`
+		Admin   string `yaml:"admin"`
+		Secret  string `yaml:"secret"`
+	} `yaml:"nsq"`
+
+	Kafka struct {
+		ConsumerOffset ConsumerOffset `yaml:"consumerOffset"`
+		Brokers        string         `yaml:"brokers"`
+		Partition      Partition      `yaml:"Partition"`
+	} `yaml:"kafka"`
+}

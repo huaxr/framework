@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = ".;proto";
+
+package proto;
+
+message TestReq {
+    int32  Data =1;
+}
+
+message TestResponse {
+  int32  Data =1;
+}
+
+service TestRpc {
+  rpc GetCache (TestReq) returns (TestResponse) {}
+}

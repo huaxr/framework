@@ -1,0 +1,60 @@
+# 标志位提供给业务使用，判断是否本地环境等
+env: local  # local test gray online
+
+psm: montage.arch.metric
+
+#monitor:
+#  url: 127.0.0.1:9000
+#  interval: 10
+
+log:
+  level: debug   # debug info
+  encoder: console  # json or console, 本地调试用 console 更美观， 线上环境请用json，可以和网关日志打通
+  console: true     # 是否终端打印(否则直接刷盘)
+  disabletags: true # 如果encoder是console，为了本地调试输出简洁好看，将其设置未true即可，线上环境请设置未false
+  infofile: /tmp/my.log   # info 级别以上日志保存的地址
+
+# grpc的配置
+grpc:
+  etcd: 10.90.72.58:2379, 10.90.72.94:2379, 10.90.72.135:2379
+  port: 9999
+
+tcm:
+  namespaceId: "50f5d1b3-75f1-4e80-b4d4-427a78e4cecb"
+  groupName: "framework"
+  accessKey: "VEFMX1ROU181MGY1ZDFiMy03NWYxLTRlODAtYjRkNC00MjdhNzhlNGNlY2I="
+  secretKey: "VEFMX1ROU19f5YyX5LqsX+S4lue6quS6kuiBlOWNmuWFtF9wcm9kNTBmNWQxYjMtNzVmMS00ZTgwLWI0ZDQtNDI3YTc4ZTRjZWNiXzMy"
+  endpoint: "http://xxx.com"
+  contextPath: "/tcm-api/nacos"
+  port: 80
+  logDir: ""
+  cacheDir: ""
+  files:
+    - "test"
+
+# ginx的配置
+gin:
+  mode: release  #默认release就行
+  port: 8888
+
+# 支持多mysql客户端，注意yml的写法， - 表示列表中的一项，注意空格
+mysql:
+  - slaves:
+      - other_rw:DA65d357D8dd4666bf4fAbfD6624f139@tcp(10.90.29.171:6306)/xesflow?charset=utf8mb4
+      - other_rw:DA65d357D8dd4666bf4fAbfD6624f139@tcp(10.90.29.171:6306)/xesflow?charset=utf8mb4
+    master: other_rw:DA65d357D8dd4666bf4fAbfD6624f139@tcp(10.90.29.171:6306)/xesflow?charset=utf8mb4
+    maxConn: 5
+    maxIdle: 2
+    showSql: true
+    slowDuration: 1
+
+# 支持多redis客户端，注意yml的写法， - 表示列表中的一项，注意空格
+redis:
+  - host: 127.0.0.1:6379 #twproxy
+    password:
+    idletimeout: 240
+    readtimeout: 20
+    maxretry: 3
+    poolsize: 100
+    db: 0
+    showQuery: true

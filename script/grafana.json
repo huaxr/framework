@@ -1,0 +1,2518 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 25,
+  "iteration": 1675667785559,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "日志平台",
+      "tooltip": "日志查询",
+      "type": "link",
+      "url": "https://cloud.tal.com/logcenter#/search"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": false,
+      "tags": [],
+      "targetBlank": false,
+      "title": "Kibana",
+      "tooltip": "",
+      "type": "link",
+      "url": "https://basiclog.xesv5.com/app/kibana#/discover?_g=h@bf269a7&_a=h@623d88a"
+    }
+  ],
+  "panels": [
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rpc qps"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gin qps"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gin 限流"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "rpc熔断"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "keepalive close"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "sum",
+            "mean"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "rpc qps",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_grpc_qps\" AND x_psm: $psm AND x_handler_path: $handler",
+          "refId": "J",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "gin qps",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_ginx_qps\" AND x_psm: $psm AND x_handler_path: $handler",
+          "refId": "I",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "keepalive close",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_grpc_closed\" AND x_psm: $psm",
+          "refId": "K",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "rpc熔断",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_grpc_circuit\" AND x_psm: $psm",
+          "refId": "L",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "gin 限流",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_ginx_limit\" AND x_psm: $psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "PSM流量监控",
+      "transparent": true,
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 0,
+        "y": 7
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "snCount{}",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "学习机终端总量",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 2,
+        "x": 3,
+        "y": 7
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(podCount{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "$psm",
+          "refId": "A"
+        }
+      ],
+      "title": "Pod 总量",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 5,
+        "y": 7
+      },
+      "id": 19,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(cpuPercent{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "cpu",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "avg(memPercent{psm=~\"$psm\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "内存",
+          "refId": "C"
+        }
+      ],
+      "title": "Process硬件使用率 avg",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 12,
+        "y": 7
+      },
+      "id": 20,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(redisHitPercent{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "$psm",
+          "refId": "A"
+        }
+      ],
+      "title": "redis命中率 avg",
+      "type": "stat"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 15,
+        "y": 7
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(mysqlAvgQps{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "$psm",
+          "refId": "A"
+        }
+      ],
+      "title": "Mysql avg QPS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 2000
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 18,
+        "y": 7
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last"
+          ],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "none"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(goroutineCount{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "$psm",
+          "refId": "A"
+        }
+      ],
+      "title": "协程数 avg",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Prometheus",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 3,
+        "x": 21,
+        "y": 7
+      },
+      "id": 25,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "avg(kafkaErrAvgEps{psm=~\"$psm\"})",
+          "interval": "",
+          "legendFormat": "$psm",
+          "refId": "A"
+        }
+      ],
+      "title": "Kafka err EPS",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "hidden",
+            "axisSoftMin": 0,
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 0
+          },
+          "links": [],
+          "mappings": [],
+          "min": 0,
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 20
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 12
+      },
+      "id": 8,
+      "options": {
+        "barWidth": 0.85,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "hidden",
+          "placement": "bottom"
+        },
+        "orientation": "horizontal",
+        "showValue": "always",
+        "text": {},
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "psm",
+          "bucketAggs": [
+            {
+              "field": "x_psm",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "5",
+              "type": "count"
+            }
+          ],
+          "query": "x_psm:$psm AND (x_tag:arch_grpc_qps OR x_tag:arch_ginx_qps) AND x_handler_path: $handler",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "流量分布",
+      "type": "barchart"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "/metrics",
+                  "/deviceProto.VersionRpc/SnReleaseVersion",
+                  "/v1/home/sysupgrade",
+                  "/hosts",
+                  "/userCenter.UserService/GetStuInfoByToken",
+                  "/basicInfo.MergeBasicRpc/GetMergeBasics",
+                  "/course.CourseRpc/GetCourseListWithPlanAndPeriodByCourseIds",
+                  "/course.CourseRpc/GetCourseListWithPlanAndPeriodByPagination",
+                  "/course.CourseRpc/GetCourseWithPlanAndPeriodByCourseId",
+                  "/course/getCourseListWithPlanAndPeriodByCourseIds",
+                  "/course/getCourseListWithPlanAndPeriodByPagination",
+                  "/stuCourse.StuCourseRpc/GetAllStuCourse",
+                  "/stucourse.StuCourse/GetStuCourseLockStatus",
+                  "/user/info/token",
+                  "/userCenter.UserBackService/GetStuIdsByStuId",
+                  "/v1/course/detail",
+                  "/valuation.UserValuationService/GetUserGradeValuationAmountByTalId",
+                  "/valuation/grades",
+                  "/collector",
+                  "/basicInfo.GradeRelationRpc/GetSubjectListsByGradeIdRpc",
+                  "/course.CourseRpc/GetCourseListBySubjectGradeDifficultVersionTerm",
+                  "/valuation.UserValuationService/CheckUserHasValuation",
+                  "/v1/select/course",
+                  "/v1/select/courseandvaluation",
+                  "/course.CourseRpc/GetCourseMapByCourseIds",
+                  "/course.CourseRpc/GetPeriodListByPlanIds",
+                  "/course.CourseRpc/GetCourseMapWithPlanByCourseIds",
+                  "/course.CourseRpc/GetCourseByCourseId",
+                  "/course.CourseRpc/GetPeriodListByPeriodIds",
+                  "/userCenter.UserBackService/GetStuInfoListByStuIds",
+                  "/userCenter.UserBackService/GetStuInfoByTalIdAndOrgId",
+                  "/userCenter.UserService/GetGradeList",
+                  "/userCenter.UserService/UserLogin",
+                  "/userCenter.UserService/GetStuInfo",
+                  "/userCenter.UserService/UserModifyInfo",
+                  "/userCenter.UserService/SendCaptchaByPhone",
+                  "/userCenter.UserService/UserReg",
+                  "/group.Group/GetGroupByStuAndCourse",
+                  "/api/v1/stu/studydata",
+                  "/api/v1/campus/teacherlist",
+                  "/studydata.StudyData/GetStuPlanDurationInfo",
+                  "/studydata.StudyData/GetStuPlanInteractInfo",
+                  "/api/v1/order/select",
+                  "/studydata.StudyData/GetStuDurationInfo",
+                  "/api/v1/school/campuslist",
+                  "/api/v1/stu/stulist",
+                  "/basicInfo.GradeRpc/GetGradeListByPagination",
+                  "/plan/getPeriodListByPlanIds",
+                  "/basicInfo.TermRpc/GetTermListByPagination",
+                  "/cms/term/list",
+                  "/deviceProto.SnRpc/SnVerify",
+                  "/v1/select/optiondata",
+                  "/v1/select/saveoption",
+                  "/stucourse.StuCourse/StuCourseLockOperate",
+                  "/course.CourseRpc/GetVideoInfos",
+                  "/v1/home/snverify",
+                  "/v1/user/info",
+                  "/v1/user/learningdetail",
+                  "/v1/user/schedule"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "id": 17,
+      "options": {
+        "displayLabels": [
+          "percent"
+        ],
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "x_handler_path",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "x_date",
+              "id": "5",
+              "settings": {
+                "interval": "7d",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "hide": false,
+              "id": "4",
+              "type": "count"
+            }
+          ],
+          "query": "x_psm:$psm AND -x_handler_path :\"\" AND x_handler_path: $handler",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "handler 方法调用分布  top 10",
+      "type": "piechart"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Elasticsearch",
+      "decimals": null,
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "hiddenSeries": false,
+      "id": 14,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": false,
+        "hideEmpty": false,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": false,
+        "sort": "avg",
+        "sortDesc": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": false
+      },
+      "percentage": false,
+      "pluginVersion": "8.0.2",
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "x_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "x_handler_period",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "x_psm: $psm AND x_handler_period:>=0 AND x_handler_path: $handler",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "thresholds": [
+        {
+          "$$hashKey": "object:83",
+          "colorMode": "critical",
+          "fill": true,
+          "line": true,
+          "op": "gt",
+          "value": 3000,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "时延",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:2047",
+          "format": "ms",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": "0.000001",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:2048",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_handler_path"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 255
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "handler"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 386
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "p95延迟"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 134
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 18
+      },
+      "id": 27,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "x_handler_path",
+              "id": "2",
+              "settings": {
+                "order": "desc",
+                "orderBy": "1[99.9]",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "x_handler_period",
+              "id": "1",
+              "settings": {
+                "percents": [
+                  "95",
+                  "99.9"
+                ]
+              },
+              "type": "percentiles"
+            }
+          ],
+          "query": "x_psm: $psm AND x_handler_period:>=0 AND x_handler_path: $handler",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "时延 P999 分布",
+      "transformations": [
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "p99.9 x_handler_period"
+              }
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "p95.0 x_handler_period": "p95延迟",
+              "p99.9 x_handler_period": "p999延迟",
+              "p99.999 x_handler_period": "p999延迟",
+              "x_handler_path": "handler"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "description": "错误信息的分布",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "仅为framework埋点",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 100,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "业务错误"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "架构Panic捕获"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "架构埋点错误"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [
+            "max",
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "repeat": null,
+      "targets": [
+        {
+          "alias": "框架埋点错误",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_error\" AND x_psm: $psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "框架Panic捕获",
+          "bucketAggs": [
+            {
+              "field": "x_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_fatal\" AND x_psm: $psm",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "业务错误日志",
+          "bucketAggs": [
+            {
+              "field": "x_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_level: \"ERROR\" AND x_psm: $psm",
+          "refId": "C",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "系统错误/业务ERR",
+      "type": "timeseries"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "links": [],
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 9,
+        "x": 12,
+        "y": 26
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "x_psm",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "x_date",
+              "id": "5",
+              "settings": {
+                "interval": "7d",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "hide": false,
+              "id": "4",
+              "type": "count"
+            }
+          ],
+          "query": "x_level: \"ERROR\" AND x_psm:$psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "业务logger.Error",
+      "type": "piechart"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "links": [],
+          "mappings": [],
+          "min": 1,
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 21,
+        "y": 26
+      },
+      "id": 9,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "values": [
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "x_psm",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_count",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "x_date",
+              "id": "5",
+              "settings": {
+                "interval": "7d",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "hide": false,
+              "id": "4",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_fatal\" AND x_psm: $psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "panic错误分布",
+      "type": "piechart"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_host"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "IP"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_date"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "日期"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_msg"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "错误信息"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_version"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "框架版本"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "错误信息"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 656
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_psm"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 210
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "框架版本"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "collector_user"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_call_from"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 121
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_duration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 69
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "IP"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 112
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "x_tag"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 48
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "具体信息"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 280
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 33
+      },
+      "id": 16,
+      "options": {
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "(x_tag: arch_fatal OR x_tag: arch_error OR x_level: ERROR) AND x_psm:$psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        }
+      ],
+      "title": "错误原日志",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "@metadata.beat": true,
+              "@metadata.type": true,
+              "@metadata.version": true,
+              "@timestamp": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "beat.hostname": true,
+              "beat.name": true,
+              "beat.version": true,
+              "bu_name": true,
+              "cluster": true,
+              "collector_user": false,
+              "container_app_name": true,
+              "container_app_namespace": true,
+              "dep_id": true,
+              "department_name": true,
+              "es_sink_time": true,
+              "file_name": true,
+              "filebeat_ts": true,
+              "flinkKafkaRetriesNum": true,
+              "flink_jobname": true,
+              "highlight": true,
+              "input.type": true,
+              "is_import": true,
+              "last_operator_user": true,
+              "log.file": true,
+              "log_kind": true,
+              "log_type": true,
+              "offset": true,
+              "parse_type": true,
+              "prospector.type": true,
+              "service_id": true,
+              "service_name": true,
+              "sort": true,
+              "source": true,
+              "tags": true,
+              "tallog_id": true,
+              "uid": true,
+              "x_file": true,
+              "x_handler_path": true,
+              "x_handler_period": true,
+              "x_level": true,
+              "x_start_time": true,
+              "x_tag": false
+            },
+            "indexByName": {},
+            "renameByName": {
+              "collector_user": "用户",
+              "x_call_from": "调用方",
+              "x_date": "记录日期",
+              "x_duration": "链路耗时(秒)",
+              "x_host": "pod ip",
+              "x_msg": "具体信息",
+              "x_psm": "PSM",
+              "x_tag": "tag",
+              "x_trace_id": "trace id",
+              "x_version": "框架版本"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "table"
+    },
+    {
+      "datasource": "Elasticsearch",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务请求"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务列表污染"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "配置中心下发"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务注册"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务列表校验"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务列表空"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "服务过期"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 40
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "pluginVersion": "8.0.2",
+      "targets": [
+        {
+          "alias": "服务列表空",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_host_empty\" AND x_psm: $psm",
+          "refId": "A",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务列表污染",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_sf_contaminate\" AND x_psm: $psm",
+          "refId": "B",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务列表校验",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_sf_diff\" AND x_psm: $psm",
+          "refId": "C",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务过期",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_lease_expire\" AND x_psm: $psm",
+          "refId": "F",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务注册",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_put\" AND x_psm: $psm",
+          "refId": "D",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务平滑下线",
+          "bucketAggs": [
+            {
+              "field": "x_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_del\" AND x_psm: $psm",
+          "refId": "K",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "服务查询",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_get\" AND x_psm: $psm",
+          "refId": "E",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "配置中心下发",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_tcm_update\" AND x_psm: $psm",
+          "refId": "G",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "监听管道-注册",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_watch_put\" AND x_psm: $psm",
+          "refId": "I",
+          "timeField": "@timestamp"
+        },
+        {
+          "alias": "监听管道-销毁",
+          "bucketAggs": [
+            {
+              "field": "@timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "x_tag: \"arch_etcd_watch_del\" AND x_psm: $psm",
+          "refId": "J",
+          "timeField": "@timestamp"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "服务发现",
+      "transparent": true,
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 30,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "montage.user_center.online"
+          ],
+          "value": [
+            "montage.user_center.online"
+          ]
+        },
+        "datasource": "Elasticsearch",
+        "definition": "{\"find\":\"terms\", \"field\":\"x_psm\", \"size\":1000}",
+        "description": "PSM",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "psm",
+        "multi": true,
+        "name": "psm",
+        "options": [],
+        "query": "{\"find\":\"terms\", \"field\":\"x_psm\", \"size\":1000}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": "Elasticsearch",
+        "definition": "{\"find\":\"terms\", \"field\":\"x_handler_path\", \"size\":1000, \"query\":\"x_psm:$psm\"}",
+        "description": "handler",
+        "error": null,
+        "hide": 0,
+        "includeAll": true,
+        "label": "handler",
+        "multi": true,
+        "name": "handler",
+        "options": [],
+        "query": "{\"find\":\"terms\", \"field\":\"x_handler_path\", \"size\":1000, \"query\":\"x_psm:$psm\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "学习机PSM框架监控",
+  "uid": "hOmEpYD4z",
+  "version": 777
+}

@@ -1,0 +1,19 @@
+[Unit]
+Description=etcd service
+Documentation=https://github.com/etcd-io/etcd
+After=network.target
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=tnuser
+Type=notify
+EnvironmentFile=/usr/local/etcd/etcd.conf
+WorkingDirectory=/usr/local/etcd
+ExecStart=/usr/local/etcd/etcd
+Restart=always
+RestartSec=10s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target
