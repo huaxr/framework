@@ -453,52 +453,8 @@ export GOPROXY=https://goproxy.cn,http://mirrors.xxx.com/repository/go
 
 本地(网校idc搭建的和bcc-test不通)
 
-etcd: 10.90.72.58:2379, 10.90.72.94:2379, 10.90.72.135:2379
+etcd: 10.xx.xx.xx:2379, 10.xx.xx.xx:2379, 10.xx.xx.xx:2379
 
 测试etcd：（本地不能用该地址）
 
-bcc-test-montage-etcd-headless.etcd.svc.cluster.local:2379
-
- 
-
-### Http util配置
-
-```plain
-http:
-  needLog: true
-  transport:
-    maxIdleConns: 500
-    maxIdleConnsPerHost: 100
-    idleConnTimeout: 10
-    httpVersion: "HTTP/1.1"
-```
-使用http util请求，needLog=true时输出http请求参数，返回体，默认不输出
-可配置transport参数，httpVersion可选HTTP/2.0，HTTP/1.1
-
-
-### errorx错误处理
-
-新增errorx包，实现error
-
-可以使用AddCustomerErrors()\AddCustomerError()方法添加自定义异常：
-
-```plain
-AddCustomerErrors(map[int]string{
-   1: "异常1",
-   2: "异常2",
-})
-```
-可以使用：WrapWithRetMsg()\WrapWithCodeRetMsg()方法包装异常：
-```plain
-err := errors.New("unmarshal error")
-
-err = WrapWithRetMsg(err, "返回1")
-err = WrapWithCodeRetMsg(err, 1,"返回2")
-```
-在gin返回异常时，会判断异常类型，并返回异常信息：
-
-
-如果异常为MError类型，返回MError内定义的异常信息
-
-如果不是MError类型，有传入msg信息，返回msg内容，否则默认”服务错误“
-
+xx-etcd-headless.etcd.svc.cluster.local:2379
